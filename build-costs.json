@@ -1,0 +1,31 @@
+{
+  "sessions": [
+    {
+      "id": "2026-03-31-planning",
+      "date": "2026-03-31",
+      "description": "Project planning, tech stack decision, design direction, Stitch prompts",
+      "model": "claude-opus-4-6",
+      "platform": "claude.ai",
+      "estimated_tokens": { "input": 45000, "output": 25000 },
+      "estimated_cost_usd": 1.20,
+      "pr": null,
+      "notes": "Initial planning conversation. Decided on Astro + Turborepo monorepo, Kazakhstan-inspired color palette, WebAuthn auth, Supabase backend."
+    },
+    {
+      "id": "2026-03-31-scaffold",
+      "date": "2026-03-31",
+      "description": "Monorepo scaffolding, initial site structure, CI/CD setup",
+      "model": "claude-opus-4-6",
+      "platform": "claude.ai",
+      "estimated_tokens": { "input": 20000, "output": 15000 },
+      "estimated_cost_usd": 0.65,
+      "pr": "Initial commit",
+      "notes": "Generated full monorepo scaffold with Astro, Turborepo, shared packages, GitHub Actions."
+    }
+  ],
+  "totals": {
+    "estimated_cost_usd": 1.85,
+    "sessions_count": 2,
+    "models_used": ["claude-opus-4-6"]
+  }
+}

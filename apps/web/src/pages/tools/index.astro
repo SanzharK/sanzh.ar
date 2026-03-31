@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Tools — sanzh.ar">
+
+  <section style="padding: 48px 0;">
+    <h1 style={`
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+    `}>Tools</h1>
+    <p style="font-size: 17px; color: var(--text-secondary); margin: 0 0 48px; max-width: 600px;">
+      Real tools I use daily. Each has a public landing page showing the what and why — the apps themselves are private, secured with passkey authentication.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        box-shadow: var(--shadow-card);
+      `}>
+        <div style="font-size: 32px; margin: 0 0 16px;">💰</div>
+        <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 600; margin: 0 0 8px;">Finance tracker</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; line-height: 1.6;">
+          Monthly budgeting, transaction categorization, spending trends. Built with React, Supabase, and charts.
+        </p>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style={`
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--highlight);
+          `}></span>
+          <span style="font-size: 13px; color: var(--text-tertiary);">In development</span>
+        </div>
+      </div>
+
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        box-shadow: var(--shadow-card);
+      `}>
+        <div style="font-size: 32px; margin: 0 0 16px;">🎾</div>
+        <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 600; margin: 0 0 8px;">Tennis booking</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; line-height: 1.6;">
+          Court availability checker and booking assistant for local tennis clubs.
+        </p>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary);"></span>
+          <span style="font-size: 13px; color: var(--text-tertiary);">Planned</span>
+        </div>
+      </div>
+
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 32px;
+        box-shadow: var(--shadow-card);
+      `}>
+        <div style="font-size: 32px; margin: 0 0 16px;">⚽</div>
+        <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 600; margin: 0 0 8px;">Football manager</h3>
+        <p style="font-size: 14px; color: var(--text-secondary); margin: 0 0 20px; line-height: 1.6;">
+          Team roster, match scheduling, availability polling for my weekly football group.
+        </p>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary);"></span>
+          <span style="font-size: 13px; color: var(--text-tertiary);">Planned</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

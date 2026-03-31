@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Projects — sanzh.ar">
+
+  <section style="padding: 48px 0;">
+    <h1 style={`
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+    `}>Projects</h1>
+    <p style="font-size: 17px; color: var(--text-secondary); margin: 0 0 48px; max-width: 600px;">
+      Each project includes the full story: PRD, design decisions, AI prompts, costs, and lessons learned.
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <a href="/projects/this-website" style={`
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        padding: 24px;
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+        transition: all 0.2s ease;
+        color: inherit;
+      `}>
+        <div style={`
+          width: 64px;
+          height: 64px;
+          background: linear-gradient(135deg, var(--accent-soft), var(--highlight-soft));
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 28px;
+          flex-shrink: 0;
+        `}>🏗️</div>
+        <div style="flex: 1;">
+          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 600; margin: 0 0 4px;">This website</h3>
+          <p style="font-size: 14px; color: var(--text-secondary); margin: 0;">Astro monorepo, Kazakhstan-inspired design system, transparent AI costs</p>
+        </div>
+        <span style="font-size: 14px; color: var(--text-tertiary);">→</span>
+      </a>
+
+      <div style={`
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        padding: 24px;
+        background: var(--bg-surface);
+        border: 0.5px dashed var(--border-default);
+        border-radius: var(--radius-lg);
+        color: var(--text-tertiary);
+      `}>
+        <div style={`
+          width: 64px;
+          height: 64px;
+          background: var(--highlight-soft);
+          border-radius: var(--radius-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 28px;
+          flex-shrink: 0;
+        `}>💰</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 17px; font-weight: 600; margin: 0 0 4px; color: var(--text-tertiary);">Finance tracker</h3>
+          <p style="font-size: 14px; margin: 0;">Coming soon — personal budgeting and expense tracking</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

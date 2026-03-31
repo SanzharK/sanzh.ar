@@ -1,0 +1,103 @@
+---
+import '../styles/globals.css';
+import buildCosts from '../../../../build-costs.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'sanzh.ar', description = 'Director of Engineering. Building tools, sharing everything.' } = Astro.props;
+const totalCost = buildCosts.totals.estimated_cost_usd.toFixed(2);
+const sessionCount = buildCosts.totals.sessions_count;
+---
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav style={`
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--bg-primary) 85%, transparent);
+      border-bottom: 0.5px solid var(--border-default);
+    `}>
+      <div style={`
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      `}>
+        <a href="/" style={`
+          font-family: var(--font-heading);
+          font-weight: 700;
+          font-size: 18px;
+          color: var(--text-primary);
+          letter-spacing: -0.02em;
+        `}>
+          sanzh.ar
+        </a>
+        <div style="display: flex; gap: 32px; align-items: center;">
+          <a href="/projects" style={`font-size: 15px; color: var(--text-secondary); transition: color 0.15s;`}>Projects</a>
+          <a href="/tools" style={`font-size: 15px; color: var(--text-secondary); transition: color 0.15s;`}>Tools</a>
+          <a href="/build-log" style={`font-size: 15px; color: var(--text-secondary); transition: color 0.15s;`}>Build log</a>
+          <a href="/about" style={`font-size: 15px; color: var(--text-secondary); transition: color 0.15s;`}>About</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main style="max-width: 1080px; margin: 0 auto; padding: 48px 24px;">
+      <slot />
+    </main>
+
+    <!-- Footer with cost ticker -->
+    <footer style={`
+      border-top: 0.5px solid var(--border-default);
+      margin-top: 96px;
+    `}>
+      <div style={`
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 32px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--text-tertiary);
+      `}>
+        <span>© 2026 Sanzhar</span>
+        <a href="/build-log" style={`
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          color: var(--text-tertiary);
+          background: var(--highlight-soft);
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
+          font-size: 12px;
+          transition: all 0.15s;
+        `}>
+          <span style="color: var(--highlight);">●</span>
+          Built with AI · ${totalCost} across {sessionCount} sessions
+        </a>
+        <div style="display: flex; gap: 24px;">
+          <a href="https://github.com/SanzharK" style="color: var(--text-tertiary);">GitHub</a>
+          <a href="https://linkedin.com/in/" style="color: var(--text-tertiary);">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import buildCosts from '../../../../build-costs.json';
+
+const totalCost = buildCosts.totals.estimated_cost_usd.toFixed(2);
+const sessionCount = buildCosts.totals.sessions_count;
+const models = buildCosts.totals.models_used;
+const sessions = [...buildCosts.sessions].reverse();
+---
+<BaseLayout title="Build log — sanzh.ar">
+
+  <section style="padding: 48px 0;">
+    <h1 style={`
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+    `}>Build log</h1>
+    <p style="font-size: 17px; color: var(--text-secondary); margin: 0 0 48px; max-width: 600px;">
+      Every AI-assisted session that went into building this site, with estimated costs. Full transparency.
+    </p>
+
+    <!-- Summary cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 0 0 48px;">
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 20px 24px;
+      `}>
+        <p style="font-size: 13px; color: var(--text-tertiary); margin: 0 0 4px;">Total cost</p>
+        <p style={`
+          font-size: 28px;
+          font-weight: 700;
+          font-family: var(--font-heading);
+          color: var(--highlight);
+          margin: 0;
+          letter-spacing: -0.02em;
+        `}>${totalCost}</p>
+      </div>
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 20px 24px;
+      `}>
+        <p style="font-size: 13px; color: var(--text-tertiary); margin: 0 0 4px;">Sessions</p>
+        <p style="font-size: 28px; font-weight: 700; font-family: var(--font-heading); margin: 0; letter-spacing: -0.02em;">{sessionCount}</p>
+      </div>
+      <div style={`
+        background: var(--bg-surface);
+        border: 0.5px solid var(--border-default);
+        border-radius: var(--radius-lg);
+        padding: 20px 24px;
+      `}>
+        <p style="font-size: 13px; color: var(--text-tertiary); margin: 0 0 4px;">Models used</p>
+        <p style="font-size: 16px; font-weight: 600; font-family: var(--font-mono); margin: 0;">{models.join(', ')}</p>
+      </div>
+    </div>
+
+    <!-- Session list -->
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      {sessions.map((session) => (
+        <div style={`
+          padding: 20px 24px;
+          background: var(--bg-surface);
+          border: 0.5px solid var(--border-default);
+          border-radius: var(--radius-lg);
+        `}>
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin: 0 0 8px;">
+            <h3 style="font-size: 15px; font-weight: 600; margin: 0;">{session.description}</h3>
+            <span style={`
+              font-size: 13px;
+              font-family: var(--font-mono);
+              color: var(--highlight);
+              background: var(--highlight-soft);
+              padding: 2px 10px;
+              border-radius: var(--radius-full);
+              white-space: nowrap;
+            `}>${session.estimated_cost_usd.toFixed(2)}</span>
+          </div>
+          <div style="display: flex; gap: 16px; font-size: 13px; color: var(--text-tertiary);">
+            <span style="font-family: var(--font-mono);">{session.date}</span>
+            <span>{session.model}</span>
+            <span>{session.platform}</span>
+          </div>
+          {session.notes && (
+            <p style="font-size: 13px; color: var(--text-secondary); margin: 12px 0 0; line-height: 1.5;">{session.notes}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+</BaseLayout>

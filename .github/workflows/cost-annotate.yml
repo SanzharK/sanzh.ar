@@ -1,0 +1,45 @@
+name: Cost Annotation
+
+on:
+  pull_request:
+    paths:
+      - 'build-costs.json'
+
+jobs:
+  annotate:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Calculate cost delta
+        id: cost
+        run: |
+          # Get the cost from the PR branch
+          NEW_COST=$(jq '.totals.estimated_cost_usd' build-costs.json)
+          
+          # Get the cost from main
+          git show origin/main:build-costs.json > /tmp/old-costs.json 2>/dev/null || echo '{"totals":{"estimated_cost_usd":0}}' > /tmp/old-costs.json
+          OLD_COST=$(jq '.totals.estimated_cost_usd' /tmp/old-costs.json)
+          
+          DELTA=$(echo "$NEW_COST - $OLD_COST" | bc)
+          echo "delta=$DELTA" >> $GITHUB_OUTPUT
+          echo "total=$NEW_COST" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const delta = '${{ steps.cost.outputs.delta }}';
+            const total = '${{ steps.cost.outputs.total }}';
+            const body = `### 💰 Build cost update\n\nThis PR adds **$${delta}** to the build cost.\n\n**Running total: $${total}**\n\n_Updated automatically from build-costs.json_`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      ".env",
+      ".env.*",
+      "**/*.key",
+      "**/*.pem"
+    ],
+    "ask": [
+      "rm -rf",
+      "git push --force",
+      "pnpm add"
+    ]
+  }
+}

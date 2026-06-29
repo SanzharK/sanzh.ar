@@ -7,9 +7,9 @@
       "**/*.pem"
     ],
     "ask": [
-      "rm -rf",
-      "git push --force",
-      "pnpm add"
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(pnpm add:*)"
     ]
   }
 }

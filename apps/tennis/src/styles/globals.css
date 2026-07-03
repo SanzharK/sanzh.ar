@@ -145,3 +145,14 @@ pre code {
   background: none;
   padding: 0;
 }
+
+/* Tennis Butler app styles */
+.tb-skeleton {
+  background: var(--bg-surface-hover);
+  animation: tb-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes tb-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}

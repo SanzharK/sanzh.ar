@@ -51,7 +51,7 @@
       },
       "estimated_cost_usd": 12.5,
       "branch": "001-tennis-butler",
-      "pr": "",
+      "pr": "3",
       "notes": "Live verification against ClubSpark; discovered burst rate limiting (429) -> concurrency-capped fan-out. 6 candidate venues left as verified-later backlog."
     }
   ],

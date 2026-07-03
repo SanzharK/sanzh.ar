@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme {
+  /* Sky blue — from Kazakhstan flag #00AFCA */
+  --color-sky-50: #E8F7FA;
+  --color-sky-100: #B0E4ED;
+  --color-sky-200: #66CDDD;
+  --color-sky-400: #00AFCA;
+  --color-sky-600: #0B6B7A;
+  --color-sky-800: #064E5A;
+  --color-sky-900: #03333C;
+
+  /* Gold — from Kazakhstan flag #FEC50C */
+  --color-gold-50: #FEF5DC;
+  --color-gold-100: #FDE4A0;
+  --color-gold-200: #FDD05E;
+  --color-gold-400: #FEC50C;
+  --color-gold-600: #C49700;
+  --color-gold-800: #7A5800;
+  --color-gold-900: #3D2C00;
+
+  /* Deep ocean — dark mode backgrounds */
+  --color-ocean-50: #E0EAF0;
+  --color-ocean-100: #A8BFD4;
+  --color-ocean-200: #5A7B99;
+  --color-ocean-400: #2D4A63;
+  --color-ocean-600: #162D42;
+  --color-ocean-800: #0E1F30;
+  --color-ocean-900: #0A1520;
+
+  /* Warm neutral */
+  --color-warm-50: #F7F5F0;
+  --color-warm-100: #E8E5DD;
+  --color-warm-200: #C9C5BB;
+  --color-warm-400: #9A968C;
+  --color-warm-600: #6B6860;
+  --color-warm-800: #4A4740;
+  --color-warm-900: #2C2A26;
+
+  /* Semantic */
+  --color-success: #22A06B;
+  --color-warning: #CF9F02;
+  --color-danger: #DE350B;
+
+  /* Border radius — rounded and warm */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Fonts */
+  --font-heading: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Light mode (default) */
+:root {
+  --bg-primary: var(--color-warm-50);
+  --bg-surface: #FEFDFB;
+  --bg-surface-hover: #F9F7F2;
+  --text-primary: var(--color-warm-900);
+  --text-secondary: var(--color-warm-600);
+  --text-tertiary: var(--color-warm-400);
+  --border-default: var(--color-warm-100);
+  --border-hover: var(--color-warm-200);
+  --accent: var(--color-sky-400);
+  --accent-hover: var(--color-sky-600);
+  --accent-soft: var(--color-sky-50);
+  --highlight: var(--color-gold-400);
+  --highlight-soft: var(--color-gold-50);
+  --shadow-card: 0 2px 8px rgba(43, 42, 38, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(43, 42, 38, 0.10);
+  color-scheme: light;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: var(--color-ocean-800);
+    --bg-surface: var(--color-ocean-600);
+    --bg-surface-hover: var(--color-ocean-400);
+    --text-primary: var(--color-ocean-50);
+    --text-secondary: var(--color-ocean-100);
+    --text-tertiary: var(--color-ocean-200);
+    --border-default: #1E3A52;
+    --border-hover: var(--color-ocean-400);
+    --accent: var(--color-sky-200);
+    --accent-hover: var(--color-sky-100);
+    --accent-soft: var(--color-sky-900);
+    --highlight: var(--color-gold-200);
+    --highlight-soft: var(--color-gold-900);
+    --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.20);
+    --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.30);
+    color-scheme: dark;
+  }
+}
+
+/* Base styles */
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.75;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-sky-400);
+  color: white;
+}
+
+/* Code blocks */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: var(--accent-soft);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

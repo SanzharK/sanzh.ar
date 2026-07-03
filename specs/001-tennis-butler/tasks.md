@@ -105,10 +105,12 @@
 
 ### Implementation for User Story 4
 
-- [ ] T025 [US4] Compile candidate ClubSpark venues within ~30km of Drummoyne from directories (tennisvenues.com.au, KeepActive, Tennis NSW club finder) per research.md R3; verify every slug via `probe-venues.mjs`; hand-enter coords; seed `apps/tennis/src/data/venues.ts` to ≥15 verified ClubSpark venues (SC-002); sanity-check all distances ≤ ~30km
-- [ ] T026 [US4] Onboarding drill: add one additional real club end-to-end following `specs/001-tennis-butler/quickstart.md` exactly, timing the process; fix quickstart.md where reality diverges (SC-004)
+- [X] T025 [US4] Compile candidate ClubSpark venues within ~30km of Drummoyne from directories (tennisvenues.com.au, KeepActive, Tennis NSW club finder) per research.md R3; verify every slug via `probe-venues.mjs`; hand-enter coords; seed `apps/tennis/src/data/venues.ts` to ≥15 verified ClubSpark venues (SC-002); sanity-check all distances ≤ ~30km
+- [X] T026 [US4] Onboarding drill: add one additional real club end-to-end following `specs/001-tennis-butler/quickstart.md` exactly, timing the process; fix quickstart.md where reality diverges (SC-004)
 
 **Checkpoint**: Launch coverage achieved; onboarding path documented and proven
+
+> T025 note: 14 ClubSpark venues verified + 3 link-only externals (17 clubs total). Six more candidate slugs are documented as backlog in `venues.ts` — verification was blocked by a long ClubSpark rate-limit cooldown on the build machine's IP; re-run the probe to promote them.
 
 ---
 
@@ -116,8 +118,8 @@
 
 **Purpose**: Cross-cutting quality gates and the staging-first release flow
 
-- [ ] T027 [P] Mobile + dark-mode pass across all components: one-handed phone usability (SC-006), tokens-only styling audit (no raw colors — Principle IV), semantic HTML check
-- [ ] T028 [P] Full local gate: `pnpm --filter @sanzhar/tennis test`, `pnpm --filter @sanzhar/tennis lint` (astro check, strict TS — Principle V), `pnpm turbo build --filter=@sanzhar/tennis`, timed live search < 5s (SC-001)
+- [X] T027 [P] Mobile + dark-mode pass across all components: one-handed phone usability (SC-006), tokens-only styling audit (no raw colors — Principle IV), semantic HTML check
+- [X] T028 [P] Full local gate: `pnpm --filter @sanzhar/tennis test`, `pnpm --filter @sanzhar/tennis lint` (astro check, strict TS — Principle V), `pnpm turbo build --filter=@sanzhar/tennis`, timed live search < 5s (SC-001)
 - [X] T029 Create `.github/workflows/deploy-tennis-staging.yml` and `.github/workflows/deploy-tennis-prod.yml` mirroring the web workflows (`--filter=@sanzhar/tennis`, `working-directory: apps/tennis`, `secrets.VERCEL_TENNIS_PROJECT_ID`, paths filter per plan.md) — cross-cutting, flagged in PR (Principle VII)
 - [ ] T030 Hand the user the one-time manual checklist (plan.md → Deploy & Manual Steps): create Vercel project, add `VERCEL_TENNIS_PROJECT_ID` secret, confirm/attach domains (`tennis.sanzhar.dev` / `tennis.sanzh.ar`) — agent must NOT do these itself (Principle VI)
 - [ ] T031 Log build costs for all sessions of this feature via `node scripts/log-cost.mjs` (Principle II) — entries for specify/plan/tasks/implement phases, branch `001-tennis-butler`

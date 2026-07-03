@@ -185,4 +185,22 @@ export const VENUES: readonly Venue[] = [
     systemName: 'Skedda',
     bookingUrl: 'https://salisburytennis.skedda.com/booking',
   },
+  {
+    id: 'cintra-park',
+    name: 'Cintra Park Tennis & Sports Centre',
+    suburb: 'Concord',
+    lat: -33.8557,
+    lng: 151.1046,
+    system: 'external',
+    bookingUrl: 'https://www.cpsports.com.au/court-hire/',
+  },
 ];
+
+/**
+ * Onboarding backlog — candidate ClubSpark slugs found but NOT yet verified
+ * (probe blocked by a long rate-limit cooldown at build time, 2026-07-03).
+ * Verify with `node apps/tennis/scripts/probe-venues.mjs <date> <slug>` and
+ * promote to VENUES with hand-entered coords:
+ *   bexleytenniscourts, birchgroveparktenniscentre, cammeraytennisclub,
+ *   longuevilletennisclub, balgowlahtennisclub, bareenaparktennis
+ */

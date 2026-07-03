@@ -13,7 +13,7 @@
         "input": 45000,
         "output": 25000
       },
-      "estimated_cost_usd": 1.20,
+      "estimated_cost_usd": 1.2,
       "branch": null,
       "pr": null,
       "notes": "Initial planning conversation. Decided on Astro + Turborepo monorepo, Kazakhstan-inspired color palette, WebAuthn auth, Supabase backend."
@@ -35,20 +35,40 @@
       "branch": null,
       "pr": "Initial commit",
       "notes": "Generated full monorepo scaffold with Astro, Turborepo, shared packages, GitHub Actions."
+    },
+    {
+      "id": "2026-07-03-tennis-butler-build",
+      "date": "2026-07-03",
+      "app": "tennis",
+      "feature": "001-tennis-butler",
+      "phase": "specify+plan+tasks+implement",
+      "description": "Tennis Butler v1: spec-kit flow end to end, ClubSpark adapter research (endpoint + classification reverse-engineered), apps/tennis scaffold, core lib + tests, API route, React island UI, 14 verified venues, deploy workflows",
+      "platform": "claude-code",
+      "model": "claude-fable-5",
+      "estimated_tokens": {
+        "input": 450000,
+        "output": 75000
+      },
+      "estimated_cost_usd": 12.5,
+      "branch": "001-tennis-butler",
+      "pr": "",
+      "notes": "Live verification against ClubSpark; discovered burst rate limiting (429) -> concurrency-capped fan-out. 6 candidate venues left as verified-later backlog."
     }
   ],
   "totals": {
-    "estimated_cost_usd": 1.85,
-    "sessions_count": 2,
+    "estimated_cost_usd": 14.35,
+    "sessions_count": 3,
     "estimated_tokens": {
-      "input": 65000,
-      "output": 40000
+      "input": 515000,
+      "output": 115000
     },
     "models_used": [
-      "claude-opus-4-6"
+      "claude-opus-4-6",
+      "claude-fable-5"
     ],
     "platforms_used": [
-      "claude.ai"
+      "claude.ai",
+      "claude-code"
     ]
   }
 }

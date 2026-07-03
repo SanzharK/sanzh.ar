@@ -48,8 +48,12 @@ function walkSessions(node, out) {
   }
 }
 
+// ClubSpark rate-limits bursts (~10 rapid requests → HTTP 429); pace politely.
+const PROBE_DELAY_MS = 1500;
+
 let failures = 0;
 for (const slug of targets) {
+  if (slug !== targets[0]) await new Promise((resolve) => setTimeout(resolve, PROBE_DELAY_MS));
   const url = `https://play.tennis.com.au/v0/VenueBooking/${slug}/GetVenueSessions?startDate=${date}&endDate=${date}`;
   try {
     const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(8000) });

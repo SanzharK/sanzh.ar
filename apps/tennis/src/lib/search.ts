@@ -6,6 +6,28 @@ import { ceilToHalfHour, minutesToHhmm, nowMinutesSydney, todaySydney } from './
 import type { AvailabilityResponse, VenueResult, VenueSummary } from './types';
 
 const PER_VENUE_TIMEOUT_MS = 4000;
+const FANOUT_CONCURRENCY = 5;
+
+async function allSettledWithLimit<T>(
+  tasks: (() => Promise<T>)[],
+  limit: number
+): Promise<PromiseSettledResult<T>[]> {
+  const results = new Array<PromiseSettledResult<T>>(tasks.length);
+  let next = 0;
+  const workers = Array.from({ length: Math.min(limit, tasks.length) }, async () => {
+    while (next < tasks.length) {
+      const index = next++;
+      const task = tasks[index] as () => Promise<T>;
+      try {
+        results[index] = { status: 'fulfilled', value: await task() };
+      } catch (reason) {
+        results[index] = { status: 'rejected', reason };
+      }
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
 
 // The registry is static per deploy, so distances never change per request.
 const distances = new Map<string, number>(VENUES.map((v) => [v.id, distanceFromHomeKm(v)]));
@@ -60,8 +82,11 @@ export async function runSearch(query: AvailabilityQuery): Promise<AvailabilityR
   const clubSparkVenues = VENUES.filter((v): v is ClubSparkVenue => v.system === 'clubspark');
   const externalVenues = VENUES.filter((v): v is ExternalVenue => v.system === 'external');
 
-  const settled = await Promise.allSettled(
-    clubSparkVenues.map((venue) => availabilityResult(venue, effectiveQuery))
+  // ClubSpark rate-limits request bursts from one IP (observed HTTP 429 at
+  // ~10 back-to-back requests), so cap concurrency instead of a full fan-out.
+  const settled = await allSettledWithLimit(
+    clubSparkVenues.map((venue) => () => availabilityResult(venue, effectiveQuery)),
+    FANOUT_CONCURRENCY
   );
   const results: VenueResult[] = settled.map((outcome, index) => {
     const venue = clubSparkVenues[index] as ClubSparkVenue;

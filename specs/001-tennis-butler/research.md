@@ -37,6 +37,8 @@
 
 **Rationale**: Read-only use of an endpoint the venues' own public booking pages call, at single-user volume, with contactable identification — minimal-footprint, good-faith use. Bookings always happen on the club's site, which arguably drives them traffic.
 
+**Update (2026-07-03, during implementation)**: ClubSpark rate-limits bursts from one IP — observed HTTP 429 after ~10 back-to-back requests, with a cooldown well over 5 minutes. Consequences implemented: the search fan-out is capped at 5 concurrent requests (`FANOUT_CONCURRENCY` in `lib/search.ts`), the probe script paces requests 4s apart, and 429s degrade to per-venue error cards. If production searches trip the limit routinely, the fallback is per-venue response caching keyed on (slug, date) with a longer TTL.
+
 ## R5 — Timezone & time representation
 
 **Decision**: All availability math in venue-local minutes-from-midnight (ClubSpark's native unit). "Today"/date-window validation computed via `Intl.DateTimeFormat('en-CA', { timeZone: 'Australia/Sydney' })`. UI labels "Sydney time" once per result set.

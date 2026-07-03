@@ -49,7 +49,7 @@ function walkSessions(node, out) {
 }
 
 // ClubSpark rate-limits bursts (~10 rapid requests → HTTP 429); pace politely.
-const PROBE_DELAY_MS = 1500;
+const PROBE_DELAY_MS = 4000;
 
 let failures = 0;
 for (const slug of targets) {

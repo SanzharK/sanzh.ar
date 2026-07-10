@@ -1,0 +1,41 @@
+name: Pain Bank CI
+
+# Deploys are handled by Vercel's git integration (project root: apps/painbank;
+# staging branch -> painbank.sanzhar.dev, main -> production domain).
+# This workflow is the test gate on PRs and pushes.
+
+on:
+  pull_request:
+    paths:
+      - 'apps/painbank/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/painbank-ci.yml'
+  push:
+    branches: [staging, main]
+    paths:
+      - 'apps/painbank/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/painbank-ci.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @sanzhar/painbank test
+
+      - run: pnpm --filter @sanzhar/painbank lint
+
+      - run: pnpm turbo build --filter=@sanzhar/painbank

@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PainBank } from '../components/PainBank';
+---
+<BaseLayout>
+  <p style="margin: 0 0 20px; font-size: 14px; color: var(--text-secondary); font-style: italic; text-align: center;">
+    “Pain is just weakness leaving your body.”
+  </p>
+  <PainBank client:load />
+</BaseLayout>

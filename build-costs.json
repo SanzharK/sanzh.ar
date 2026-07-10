@@ -13,7 +13,7 @@
         "input": 45000,
         "output": 25000
       },
-      "estimated_cost_usd": 1.20,
+      "estimated_cost_usd": 1.2,
       "branch": null,
       "pr": null,
       "notes": "Initial planning conversation. Decided on Astro + Turborepo monorepo, Kazakhstan-inspired color palette, WebAuthn auth, Supabase backend."
@@ -35,20 +35,58 @@
       "branch": null,
       "pr": "Initial commit",
       "notes": "Generated full monorepo scaffold with Astro, Turborepo, shared packages, GitHub Actions."
+    },
+    {
+      "id": "2026-07-03-tennis-butler-build",
+      "date": "2026-07-03",
+      "app": "tennis",
+      "feature": "001-tennis-butler",
+      "phase": "specify+plan+tasks+implement",
+      "description": "Tennis Butler v1: spec-kit flow end to end, ClubSpark adapter research (endpoint + classification reverse-engineered), apps/tennis scaffold, core lib + tests, API route, React island UI, 14 verified venues, deploy workflows",
+      "platform": "claude-code",
+      "model": "claude-fable-5",
+      "estimated_tokens": {
+        "input": 450000,
+        "output": 75000
+      },
+      "estimated_cost_usd": 12.5,
+      "branch": "001-tennis-butler",
+      "pr": "3",
+      "notes": "Live verification against ClubSpark; discovered burst rate limiting (429) -> concurrency-capped fan-out. 6 candidate venues left as verified-later backlog."
+    },
+    {
+      "id": "2026-07-10-painbank-v1",
+      "date": "2026-07-10",
+      "app": "painbank",
+      "feature": "002-pain-bank",
+      "phase": "specify+plan+implement",
+      "description": "Pain Bank v1: spec-kit artifacts, apps/painbank scaffold, dual-mode program config, pure dial math + 45 tests, idempotent banking API on Supabase, localStorage identity, leaderboard, deploy workflows",
+      "platform": "claude-code",
+      "model": "claude-fable-5",
+      "estimated_tokens": {
+        "input": 220000,
+        "output": 40000
+      },
+      "estimated_cost_usd": 6,
+      "branch": "002-pain-bank",
+      "pr": "4",
+      "notes": "Stacked on 001-tennis-butler until PR #3 merges. Human steps pending: Supabase project + migration, Vercel project + env vars, VERCEL_PAINBANK_PROJECT_ID secret."
     }
   ],
   "totals": {
-    "estimated_cost_usd": 1.85,
-    "sessions_count": 2,
+    "estimated_cost_usd": 20.35,
+    "sessions_count": 4,
     "estimated_tokens": {
-      "input": 65000,
-      "output": 40000
+      "input": 735000,
+      "output": 155000
     },
     "models_used": [
-      "claude-opus-4-6"
+      "claude-opus-4-6",
+      "claude-fable-5"
     ],
     "platforms_used": [
-      "claude.ai"
+      "claude.ai",
+      "claude-code"
     ]
   }
 }

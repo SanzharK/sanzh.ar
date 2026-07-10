@@ -1,0 +1,37 @@
+name: Deploy Pain Bank Production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/painbank/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-painbank-prod.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm --filter @sanzhar/painbank test
+
+      - run: pnpm turbo build --filter=@sanzhar/painbank
+
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PAINBANK_PROJECT_ID }}
+          working-directory: apps/painbank
+          vercel-args: '--prod'

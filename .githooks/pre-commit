@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+node -e '
+  const fs = require("fs");
+  const l = JSON.parse(fs.readFileSync("build-costs.json","utf8"));
+  const sum = l.sessions.reduce((a,s)=>a+(s.estimated_cost_usd||0),0);
+  if (Math.abs(sum-(l.totals?.estimated_cost_usd||0)) > 0.001) {
+    console.error("build-costs.json totals do not match the session sum"); process.exit(1);
+  }
+' || { echo "Cost ledger check failed"; exit 1; }

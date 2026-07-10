@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TennisButler } from '../components/TennisButler';
+---
+<BaseLayout>
+  <h1 style="margin: 0 0 4px; font-family: var(--font-heading); font-size: 24px; letter-spacing: -0.02em;">
+    Find a free court
+  </h1>
+  <p style="margin: 0 0 24px; font-size: 15px; color: var(--text-secondary);">
+    One search across tennis clubs near Drummoyne, sorted by distance.
+  </p>
+  <TennisButler client:load />
+</BaseLayout>

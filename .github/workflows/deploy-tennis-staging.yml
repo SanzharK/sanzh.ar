@@ -1,15 +1,20 @@
-name: Deploy Staging
+name: Deploy Tennis Staging
 
 on:
   push:
     branches: [staging]
+    paths:
+      - 'apps/tennis/**'
+      - 'packages/**'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/deploy-tennis-staging.yml'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_TENNIS_PROJECT_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -22,14 +27,16 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - run: pnpm --filter @sanzhar/tennis test
+
       - name: Pull Vercel project settings
-        working-directory: apps/web
+        working-directory: apps/tennis
         run: npx vercel@latest pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build
-        working-directory: apps/web
+        working-directory: apps/tennis
         run: npx vercel@latest build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy
-        working-directory: apps/web
+        working-directory: apps/tennis
         run: npx vercel@latest deploy --prebuilt --yes --token=${{ secrets.VERCEL_TOKEN }}

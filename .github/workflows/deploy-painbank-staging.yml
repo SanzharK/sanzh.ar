@@ -37,6 +37,8 @@ jobs:
         working-directory: apps/painbank
         run: npx vercel@latest build --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Deploy
+      - name: Deploy and alias staging domain
         working-directory: apps/painbank
-        run: npx vercel@latest deploy --prebuilt --yes --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          URL=$(npx vercel@latest deploy --prebuilt --yes --token=${{ secrets.VERCEL_TOKEN }})
+          npx vercel@latest alias set "$URL" painbank.sanzhar.dev --token=${{ secrets.VERCEL_TOKEN }}

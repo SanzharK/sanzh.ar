@@ -69,7 +69,7 @@
       },
       "estimated_cost_usd": 6,
       "branch": "002-pain-bank",
-      "pr": null,
+      "pr": "4",
       "notes": "Stacked on 001-tennis-butler until PR #3 merges. Human steps pending: Supabase project + migration, Vercel project + env vars, VERCEL_PAINBANK_PROJECT_ID secret."
     }
   ],
